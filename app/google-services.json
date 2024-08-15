@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "60251692656",
+    "project_id": "casas-d282a",
+    "storage_bucket": "casas-d282a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:60251692656:android:339fe0a3a5008d4492deb5",
+        "android_client_info": {
+          "package_name": "com.aem.gestionalquileres"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv-ZZnj7v8AiNpC-ZpArTIefymTghyDiU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:60251692656:android:a1d833046b2e114b92deb5",
+        "android_client_info": {
+          "package_name": "com.aem.misviviendas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv-ZZnj7v8AiNpC-ZpArTIefymTghyDiU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

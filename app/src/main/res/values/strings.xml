@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Gestión Alquileres</string>
+    <string name="navigation_drawer_open">Abre el menú</string>
+    <string name="navigation_drawer_close">Cierra el menú</string>
+    <string name="consulta_alquileres">Gestión de Alquileres</string>
+    <string name="gesti_n_de_recibos">Gestión de Recibos</string>
+    <string name="gesti_n_de_servicios">Gestión de Servicios</string>
+    <string name="gesti_n_de_contactos">Gestión de Contactos</string>
+    <string name="gesti_n_de_empresas">Gestión de Empresas</string>
+    <string name="gesti_n_de_personas">Gestión de Personas</string>
+    <string name="consulta_casas">Consulta de Casas</string>
+    <string name="gestion_alquileres">Consulta de Alquileres</string>
+    <string name="agregar_casa">Agregar Casa</string>
+    <string name="mis_casas">Mis casas</string>
+    <string name="agregar_alquiler">Agregar Alquiler</string>
+    <string name="agregar_contacto">Agregar Contacto</string>
+    <string name="agregar_empresa">Agregar Empresa</string>
+    <string name="agregar_persona">Agregar Persona</string>
+    <string name="agregar_recibo">Agregar Recibo</string>
+    <string name="agregar_servicio">Agregar Servicio</string>
+    <string name="opciones">Opciones</string>
+    <string name="consultar">Consultas</string>
+    <string name="gestionar">Gestiones</string>
+    <string name="alquilado">Alquilado</string>
+    <string name="propiedad">Propiedad:</string>
+</resources>
