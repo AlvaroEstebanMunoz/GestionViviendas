@@ -15,9 +15,12 @@ import com.aem.gestionalquileres.R;
 import com.aem.gestionalquileres.adaptadores.CasasAdapter;
 import com.aem.gestionalquileres.modelos.Casa;
 import com.aem.gestionalquileres.utilidades.DecoracionEspacioFinal;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CasasFragment extends Fragment {
 
@@ -51,7 +54,7 @@ public class CasasFragment extends Fragment {
             // Handle double tap event, navigate to item_casa
             Bundle bundle = new Bundle();
             bundle.putSerializable("casa", casa); // Pass the Casa object to the next fragment
-            Navigation.findNavController(view).navigate(R.id.action_casasFragment_to_item_casa, bundle);
+            Navigation.findNavController(view).navigate(R.id.action_casasFragment_to_detalleCasaFragment, bundle);
         });
 
         recyclerView.setAdapter(adapter);
@@ -67,7 +70,21 @@ public class CasasFragment extends Fragment {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        adapter.submitList(Objects.requireNonNull(task.getResult()).toObjects(Casa.class));
+                        List<Casa> casasList = new ArrayList<>();
+                        for (DocumentSnapshot document : task.getResult()) {
+                            Casa casa = document.toObject(Casa.class);
+
+                            // Convertir DocumentReference a String (ID)
+                            DocumentReference propietarioRef = document.getDocumentReference("propietario");
+                            if (propietarioRef != null) {
+                                String propietarioId = propietarioRef.getId();
+                                casa.setPropietarioId(propietarioId);
+                            }
+
+                            casasList.add(casa);
+                        }
+
+                        adapter.submitList(casasList);
                     }
                 });
     }
