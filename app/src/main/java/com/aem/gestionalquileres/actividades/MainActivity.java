@@ -1,8 +1,6 @@
 package com.aem.gestionalquileres.actividades;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -11,10 +9,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-
 import com.aem.gestionalquileres.R;
 import com.google.android.material.navigation.NavigationView;
-
 
 import com.aem.gestionalquileres.fragmentos.CasasFragment;
 import com.aem.gestionalquileres.fragmentos.PersonasFragment;
@@ -33,21 +29,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Configura el Toolbar como ActionBar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Configura el DrawerLayout y ActionBarDrawerToggle
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
-                    new CasasFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new CasasFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_casas);
         }
     }
@@ -66,69 +63,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_casas) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
-                    new CasasFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new CasasFragment()).commit();
         } else if (id == R.id.nav_personas) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
-                    new PersonasFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new PersonasFragment()).commit();
         } else if (id == R.id.nav_empresas) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
-                    new EmpresasFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new EmpresasFragment()).commit();
         } else if (id == R.id.nav_contactos) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
-                    new ContactosFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new ContactosFragment()).commit();
         } else if (id == R.id.nav_servicios) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
-                    new ServiciosFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new ServiciosFragment()).commit();
         } else if (id == R.id.nav_recibos) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
-                    new RecibosFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new RecibosFragment()).commit();
         } else if (id == R.id.nav_alquileres) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
-                    new AlquileresFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AlquileresFragment()).commit();
         }
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    /* @SuppressLint("NonConstantResourceId")
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_casas:
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
-                        new CasasFragment()).commit();
-                break;
-            case R.id.nav_personas:
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
-                        new PersonasFragment()).commit();
-                break;
-            case  R.id.nav_empresas:
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
-                        new EmpresasFragment()).commit();
-                break;
-            case R.id.nav_contactos:
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
-                        new ContactosFragment()).commit();
-                break;
-            case R.id.nav_servicios:
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
-                        new ServiciosFragment()).commit();
-                break;
-            case R.id.nav_recibos:
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
-                        new RecibosFragment()).commit();
-                break;
-            case R.id.nav_alquileres:
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,
-                        new AlquileresFragment()).commit();
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + item.getItemId());
-        }
-
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    } */
 }

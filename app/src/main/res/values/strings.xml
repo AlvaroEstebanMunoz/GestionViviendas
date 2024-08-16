@@ -2,7 +2,7 @@
     <string name="app_name">Gestión Alquileres</string>
     <string name="navigation_drawer_open">Abre el menú</string>
     <string name="navigation_drawer_close">Cierra el menú</string>
-    <string name="consulta_alquileres">Gestión de Alquileres</string>
+    <string name="consulta_alquileres">Consulta de Alquileres</string>
     <string name="gesti_n_de_recibos">Gestión de Recibos</string>
     <string name="gesti_n_de_servicios">Gestión de Servicios</string>
     <string name="gesti_n_de_contactos">Gestión de Contactos</string>
