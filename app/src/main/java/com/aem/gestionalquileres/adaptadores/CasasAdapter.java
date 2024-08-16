@@ -1,8 +1,6 @@
 package com.aem.gestionalquileres.adaptadores;
 
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,9 +17,9 @@ import com.bumptech.glide.Glide;
 
 public class CasasAdapter extends ListAdapter<Casa, CasasAdapter.CasaViewHolder> {
 
-    // Interfaz para manejar el evento de doble toque
+    // Interfaz para manejar el evento de toque
     public interface OnItemClickListener {
-        void onItemDoubleTap(Casa casa);
+        void onItemClick(Casa casa);
     }
 
     private final OnItemClickListener onItemClickListener;
@@ -49,30 +47,21 @@ public class CasasAdapter extends ListAdapter<Casa, CasasAdapter.CasaViewHolder>
     public class CasaViewHolder extends RecyclerView.ViewHolder {
         private final ImageView foto;
         private final TextView alias;
-        private final GestureDetector gestureDetector;
 
         public CasaViewHolder(@NonNull View itemView) {
             super(itemView);
             foto = itemView.findViewById(R.id.foto);
             alias = itemView.findViewById(R.id.alias);
 
-            // Configurar GestureDetector para manejar el doble toque
-            gestureDetector = new GestureDetector(itemView.getContext(), new GestureDetector.SimpleOnGestureListener() {
-                @Override
-                public boolean onDoubleTap(MotionEvent e) {
-                    if (onItemClickListener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            onItemClickListener.onItemDoubleTap(getItem(position));
-                            return true;
-                        }
+            // Configurar el listener de toque
+            itemView.setOnClickListener(v -> {
+                if (onItemClickListener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        onItemClickListener.onItemClick(getItem(position));
                     }
-                    return false;
                 }
             });
-
-            // Configurar el listener de toques
-            itemView.setOnTouchListener((v, event) -> gestureDetector.onTouchEvent(event));
         }
 
         public void bind(Casa casa) {
