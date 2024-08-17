@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new CasasFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new CasasFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_casas);
         }
     }
@@ -63,19 +63,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_casas) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new CasasFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new CasasFragment()).commit();
         } else if (id == R.id.nav_personas) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new PersonasFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new PersonasFragment()).commit();
         } else if (id == R.id.nav_empresas) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new EmpresasFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new EmpresasFragment()).commit();
         } else if (id == R.id.nav_contactos) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new ContactosFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new ContactosFragment()).commit();
         } else if (id == R.id.nav_servicios) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new ServiciosFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new ServiciosFragment()).commit();
         } else if (id == R.id.nav_recibos) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new RecibosFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new RecibosFragment()).commit();
         } else if (id == R.id.nav_alquileres) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new AlquileresFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new AlquileresFragment()).commit();
         }
 
         drawer.closeDrawer(GravityCompat.START);

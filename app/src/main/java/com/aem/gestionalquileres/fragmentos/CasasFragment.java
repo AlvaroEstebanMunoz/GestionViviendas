@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,6 +59,10 @@ public class CasasFragment extends Fragment {
         });
 
         recyclerView.setAdapter(adapter);
+
+        // Obteniendo el NavController desde el FragmentContainerView
+        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+
 
         // Fetch data from Firestore
         fetchCasas();

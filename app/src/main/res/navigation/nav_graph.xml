@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigator xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:nav="http://schemas.android.com/apk/res-auto">
+    app:startDestination="@id/casasFragment">
 
     <!-- Fragmento de la lista de casas -->
     <fragment
         android:id="@+id/casasFragment"
-        android:name="com.aem.gestionalquileres.fragmentos.detalles.DetalleCasaFragment"
+        android:name="com.aem.gestionalquileres.fragmentos.CasasFragment"
         android:label="Lista de Casas"
         tools:layout="@layout/fragment_casas">
         <!-- Acción para navegar desde CasasFragment a ItemCasaFragment -->
@@ -21,6 +21,6 @@
         android:id="@+id/detalleCasaFragment"
         android:name="com.aem.gestionalquileres.fragmentos.detalles.DetalleCasaFragment"
         android:label="Detalle de la Casa"
-        tools:layout="@layout/fragment_item_casa">
+        tools:layout="@layout/item_casa">
     </fragment>
-</navigator>
+</navigation>
