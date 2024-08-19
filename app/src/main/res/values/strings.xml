@@ -23,4 +23,6 @@
     <string name="gestionar">Gestiones</string>
     <string name="alquilado">Alquilado</string>
     <string name="propiedad">Propiedad:</string>
+    <string name="ajustes">Ajustes</string>
+    <string name="busqueda">Busqueda</string>
 </resources>

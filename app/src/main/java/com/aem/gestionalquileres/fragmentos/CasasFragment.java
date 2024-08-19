@@ -8,11 +8,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aem.gestionalquileres.R;
+import com.aem.gestionalquileres.actividades.MainActivity;
 import com.aem.gestionalquileres.adaptadores.CasasAdapter;
 import com.aem.gestionalquileres.modelos.Casa;
 import com.aem.gestionalquileres.utilidades.DecoracionEspacioFinal;
@@ -25,49 +25,54 @@ import java.util.List;
 
 public class CasasFragment extends Fragment {
 
-    private RecyclerView recyclerView;
     private CasasAdapter adapter;
     private FirebaseFirestore db;
+    private NavController navController;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_casas, container, false);
+        // Inflar el layout del fragmento y devolver la vista
+        return inflater.inflate(R.layout.fragment_casas, container, false);
+    }
 
-        // Initialize Firebase Firestore
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Obtener el NavController desde la MainActivity
+        if (getActivity() instanceof MainActivity) {
+            navController = ((MainActivity) getActivity()).getNavController();
+        }
+
+        // Inicializar Firebase Firestore
         db = FirebaseFirestore.getInstance();
 
-        // Set up RecyclerView
-        recyclerView = view.findViewById(R.id.recyclerViewCasas);
+        // Configurar RecyclerView
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerViewCasas);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
         boolean isHorizontal = layoutManager.getOrientation() == LinearLayoutManager.HORIZONTAL;
 
-        // Determine orientation and create decoration
-        int space = 6; // Adjust space as needed
+        // Crear decoración y añadir al RecyclerView
+        int space = 6; // Ajustar espacio según sea necesario
         DecoracionEspacioFinal decoracion = new DecoracionEspacioFinal(space, isHorizontal);
         recyclerView.addItemDecoration(decoracion);
 
-        // Initialize adapter with an empty list and set item click listener
+        // Inicializar adaptador con una lista vacía y configurar el listener de clics
         adapter = new CasasAdapter(new CasasAdapter.CasaDiff(), casa -> {
-            // Handle double tap event, navigate to item_casa
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("casa", casa); // Pass the Casa object to the next fragment
-            Navigation.findNavController(view).navigate(R.id.action_casasFragment_to_detalleCasaFragment, bundle);
+            if (navController != null) { // Verificación de navController
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("casa", casa); // Pasar el objeto Casa al siguiente fragmento
+                navController.navigate(R.id.action_casasFragment_to_detalleCasaFragment, bundle); // Navegación
+            }
         });
-
         recyclerView.setAdapter(adapter);
 
-        // Obteniendo el NavController desde el FragmentContainerView
-        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
-
-
-        // Fetch data from Firestore
+        // Obtener datos desde Firestore
         fetchCasas();
-
-        return view;
     }
 
     private void fetchCasas() {
@@ -83,7 +88,9 @@ public class CasasFragment extends Fragment {
                             DocumentReference propietarioRef = document.getDocumentReference("propietario");
                             if (propietarioRef != null) {
                                 String propietarioId = propietarioRef.getId();
-                                casa.setPropietarioId(propietarioId);
+                                if (casa != null) {
+                                    casa.setPropietarioId(propietarioId);
+                                }
                             }
 
                             casasList.add(casa);

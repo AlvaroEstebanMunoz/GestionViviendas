@@ -1,5 +1,6 @@
 package com.aem.gestionalquileres.fragmentos.detalles;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ public class DetalleCasaFragment extends Fragment {
     private TextView aliasCasa;
     private TextView direccionCasa;
 
+    @SuppressLint("MissingInflatedId")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

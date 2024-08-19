@@ -23,4 +23,12 @@
         android:label="Detalle de la Casa"
         tools:layout="@layout/item_casa">
     </fragment>
+
+    <fragment
+        android:id="@+id/detalleAlquilerFragment"
+        android:name="com.aem.gestionalquileres.fragmentos.detalles.DetalleCasaFragment"
+        android:label="Detalle de la Casa"
+        tools:layout="@layout/item_casa">
+    </fragment>
+
 </navigation>

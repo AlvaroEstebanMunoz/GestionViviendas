@@ -11,7 +11,8 @@
     <!-- AppBarLayout with Toolbar -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/a_m_CL1">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -27,6 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
         </com.google.android.material.appbar.AppBarLayout>
 
         <!-- FrameLayout for content with NavHostFragment -->
