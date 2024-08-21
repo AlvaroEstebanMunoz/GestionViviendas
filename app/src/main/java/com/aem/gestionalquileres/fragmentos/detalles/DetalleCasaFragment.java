@@ -21,6 +21,7 @@ public class DetalleCasaFragment extends Fragment {
     private ImageView imagenCasa;
     private TextView aliasCasa;
     private TextView direccionCasa;
+    private View view;
 
     @SuppressLint("MissingInflatedId")
     @Nullable
@@ -28,10 +29,10 @@ public class DetalleCasaFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         // Inflar el layout del fragmento
-        View view = inflater.inflate(R.layout.item_casa, container, false);
+         view = inflater.inflate(R.layout.item_casa, container, false);
 
         // Inicializar las vistas
-        imagenCasa = view.findViewById(R.id.foto);
+        imagenCasa = view.findViewById(R.id.imagenCasa);
         aliasCasa = view.findViewById(R.id.aliasCasa);
         direccionCasa = view.findViewById(R.id.textViewDireccion);
 
@@ -48,8 +49,8 @@ public class DetalleCasaFragment extends Fragment {
 
     private void mostrarDetallesCasa(Casa casa) {
         // Establecer los detalles de la casa en las vistas
-        aliasCasa.setText(casa.getAlias());
         direccionCasa.setText(casa.getDireccion());
+        aliasCasa.setText(casa.getAlias());
 
         // Cargar la imagen usando Glide
         Glide.with(this)

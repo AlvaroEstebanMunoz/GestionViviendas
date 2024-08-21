@@ -11,7 +11,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.activity.OnBackPressedCallback;
 import androidx.navigation.NavController;
-import androidx.navigation.NavHost;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -23,7 +22,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawer;
     private NavController navController; // Añadido para el NavController
-    private AppBarConfiguration appBarConfiguration; // Añadido para la configuración de la AppBar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +51,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         // Configura la AppBarConfiguration
-        appBarConfiguration = new AppBarConfiguration.Builder(
+        // Añadido para la configuración de la AppBar
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_casas, R.id.nav_personas, R.id.nav_empresas, R.id.nav_contactos,
                 R.id.nav_servicios, R.id.nav_recibos, R.id.nav_alquileres)
                 .setDrawerLayout(drawer)

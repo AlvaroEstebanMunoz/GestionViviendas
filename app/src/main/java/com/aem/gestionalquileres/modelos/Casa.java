@@ -37,7 +37,10 @@ public class Casa implements Serializable {
     // Getters y Setters
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
-    public String getDireccion() { return direccion; }
+    public String getDireccion() {
+        return (direccion == null || direccion.isEmpty()) ? (direccion = "Dirección por defecto") : direccion;
+    }
+
     public void setDireccion(String direccion) { this.direccion = direccion; }
     public Long getPrecio() { return precio != null ? precio : 0L; }
     public void setPrecio(Long precio) { this.precio = precio; }
