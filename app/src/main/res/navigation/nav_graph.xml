@@ -31,4 +31,29 @@
         tools:layout="@layout/item_casa">
     </fragment>
 
+    <!--
+    <fragment
+        android:id="@+id/detalleCasaFragment"
+        android:name="com.aem.gestionalquileres.fragmentos.detalles.DetalleCasaFragment"
+        android:label="Detalle de Casa">
+        <action
+            android:id="@+id/action_to_alquileresFragment"
+            app:destination="@id/alquileresFragment" />
+        <action
+            android:id="@+id/action_to_recibosFragment"
+            app:destination="@id/recibosFragment" />
+        <! Define más acciones según sea necesario
+    </fragment> -->
+
+    <fragment
+        android:id="@+id/alquileresFragment"
+        android:name="com.aem.gestionalquileres.fragmentos.AlquileresFragment"
+        android:label="Alquileres" />
+
+    <fragment
+        android:id="@+id/recibosFragment"
+        android:name="com.aem.gestionalquileres.fragmentos.RecibosFragment"
+        android:label="Recibos" />
+
+
 </navigation>

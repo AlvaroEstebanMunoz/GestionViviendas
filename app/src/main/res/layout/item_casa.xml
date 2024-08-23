@@ -7,112 +7,174 @@
     android:layout_height="match_parent"
     tools:context=".fragmentos.detalles.DetalleCasaFragment">
 
-    <!-- Réplica de la CardView de la lista de casas -->
-    <androidx.cardview.widget.CardView
+    <!-- ScrollView para que todo el contenido pueda desplazarse si es necesario -->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:elevation="4dp"
-        android:id="@+id/cardViewCasa"
+        android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/layoutAcciones"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="16dp">
 
+        <!-- Contenedor principal que incluye CardView y otros detalles -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="8dp">
 
-            <ImageView
-                android:id="@+id/imagenCasa"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop" />
-
-            <TextView
-                android:id="@+id/aliasCasa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp"
-                android:text="Alias"/>
-
-            <TextView
-                android:id="@+id/textViewId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:layout_marginTop="8dp"
-                android:text="ID: "/>
-
-            <LinearLayout
+            <!-- CardView de la casa, ajustado para no ocupar más de 1/3 de la pantalla -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="8dp">
+                android:layout_marginBottom="16dp"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@color/cardBackgroundColor"
+                android:layout_marginTop="8dp"
+                android:id="@+id/cardViewCasa">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Precio: "
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                <TextView
-                    android:id="@+id/textViewPrecio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_weight="1"
-                    android:text="€/mes"/>
+                    <!-- Imagen ajustada para ser más pequeña -->
+                    <ImageView
+                        android:id="@+id/imagenCasa"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:scaleType="centerCrop" />
 
-                <RadioButton
-                    android:id="@+id/textViewAlquilado"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Alquilado"
-                    android:textSize="16sp"
-                    android:checked="false"/>
-            </LinearLayout>
+                    <!-- Dirección mostrada en lugar del ID -->
+                    <TextView
+                        android:id="@+id/textViewDireccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="8dp"
+                        android:text="Dirección"/>
+
+                    <!-- Precio y alquilado -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Precio: "
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textViewPrecio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:layout_weight="1"
+                            android:text="€/mes"/>
+
+                        <RadioButton
+                            android:id="@+id/textViewAlquilado"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Alquilado"
+                            android:textSize="16sp"
+                            android:checked="false"/>
+                    </LinearLayout>
+
+                    <!-- Habitaciones y metros cuadrados dentro del CardView -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Habitaciones: "
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textViewHabitaciones"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:layout_weight="1"
+                            android:text=""/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Metros: "
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textViewMetros"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:text=""/>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Incluir el carrusel -->
+            <include
+                android:id="@+id/carruselFragment"
+                layout="@layout/carrusel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                tools:visibility="visible" />
+
+            <!-- Lista para mostrar el resultado de la acción del carrusel -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listaResultados"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </androidx.core.widget.NestedScrollView>
 
-    <!-- Sección para los detalles adicionales -->
+    <!-- Layout para las acciones de añadir, modificar, eliminar -->
     <LinearLayout
-        android:layout_width="0dp"
+        android:id="@+id/layoutAcciones"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/cardViewCasa"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="16dp">
 
-        <TextView
-            android:id="@+id/textViewDireccion"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btnAñadir"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Dirección: "
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"/>
+            android:layout_weight="1"
+            android:text="Añadir" />
 
-        <TextView
-            android:id="@+id/textViewHabitaciones"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btnModificar"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Habitaciones: "
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"/>
+            android:layout_weight="1"
+            android:text="Modificar" />
 
-        <TextView
-            android:id="@+id/textViewMetros"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btnEliminar"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Metros cuadrados: "
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"/>
+            android:layout_weight="1"
+            android:text="Eliminar" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

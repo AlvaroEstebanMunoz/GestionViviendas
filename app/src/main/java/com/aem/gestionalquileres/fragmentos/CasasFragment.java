@@ -85,19 +85,27 @@ public class CasasFragment extends Fragment {
                             Casa casa = document.toObject(Casa.class);
 
                             // Convertir DocumentReference a String (ID)
-                            DocumentReference propietarioRef = document.getDocumentReference("propietario");
-                            if (propietarioRef != null) {
-                                String propietarioId = propietarioRef.getId();
+                            List<DocumentReference> propietariosRefs = (List<DocumentReference>) document.get("propietario");
+                            if (propietariosRefs != null && !propietariosRefs.isEmpty()) {
+                                List<String> propietarioIds = new ArrayList<>();
+                                for (DocumentReference propietarioRef : propietariosRefs) {
+                                    String propietarioId = propietarioRef.getId();
+                                    propietarioIds.add(propietarioId);
+                                }
+
                                 if (casa != null) {
-                                    casa.setPropietarioId(propietarioId);
+                                    casa.setPropietarioIds(propietarioIds);
                                 }
                             }
 
-                            casasList.add(casa);
+                            if (casa != null) {
+                                casasList.add(casa);
+                            }
                         }
 
                         adapter.submitList(casasList);
                     }
                 });
     }
+
 }

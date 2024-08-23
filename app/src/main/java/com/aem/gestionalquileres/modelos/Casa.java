@@ -12,8 +12,8 @@ public class Casa implements Serializable {
     private Long precio;
     private Boolean alquilable;
     private Boolean alquilado;
-    private DocumentReference propietario;
-    private String propietarioId;
+    private List<DocumentReference> propietario;
+    private List<String> propietarioId;
     private List<Alquiler> alquileres;
     private String foto;
     private String alias;
@@ -22,13 +22,13 @@ public class Casa implements Serializable {
     public Casa() {
     }
 
-    public Casa(String id, String direccion, long precio, boolean alquilable, boolean alquilado, DocumentReference propietario, String foto, String alias) {
+    public Casa(String id, String direccion, long precio, boolean alquilable, boolean alquilado, List<DocumentReference> propietario, String foto, String alias) {
         this.id = id;
         this.direccion = direccion;
         this.precio = precio;
         this.alquilable = alquilable;
         this.alquilado = alquilado;
-        this.propietario = propietario;
+        this.propietario =  propietario;
         this.alquileres = alquileres;
         this.foto = foto;
         this.alias = alias;
@@ -48,8 +48,8 @@ public class Casa implements Serializable {
     public void setAlquilable(Boolean alquilable) { this.alquilable = alquilable; }
     public Boolean isAlquilado(Boolean defaultValue) { return Optional.ofNullable(alquilado).orElse(defaultValue); }
     public void setAlquilado(Boolean alquilado) { this.alquilado = alquilado; }
-    public DocumentReference getPropietario() { return propietario; }
-    public void setPropietario(DocumentReference propietario) { this.propietario = propietario; }
+    public List<DocumentReference> getPropietario() { return propietario; }
+    public void setPropietario(List<DocumentReference> propietario) { this.propietario = propietario; }
     public String getFoto() { return foto; }
     public void setFoto(String foto) { this.foto = foto; }
     public String getAlias() { return alias; }
@@ -82,11 +82,11 @@ public class Casa implements Serializable {
                 '}';
     }
 
-    public void setPropietarioId(String propietarioId) {
+    public void setPropietarioIds(List<String> propietarioId) {
         this.propietarioId = propietarioId;
     }
 
-    public String getPropietarioId() {
+    public List<String> getPropietarioIds() {
         return propietarioId;
     }
 }
