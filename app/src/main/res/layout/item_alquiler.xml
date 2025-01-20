@@ -1,27 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent"
+    tools:context=".fragmentos.detalles.DetalleAlquilerFragment">
 
-    <TextView
-        android:id="@+id/textViewCasaId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+    <!-- ScrollView para contenido desplazable -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textViewFechaInicio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp" />
+        <!-- Contenedor principal -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textViewFechaFin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp" />
-</LinearLayout>
+            <!-- CardView para información del alquiler -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@color/cardBackgroundColor">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Contrato -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contrato:"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textViewContrato"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        tools:text="https://firebase.storage..." />
+
+                    <!-- Fecha de inicio -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha de inicio:"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_marginTop="8dp" />
+
+                    <TextView
+                        android:id="@+id/textViewFechaInicio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        tools:text="21 de agosto de 2024" />
+
+                    <!-- Fecha de renovación -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha de renovación:"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_marginTop="8dp" />
+
+                    <TextView
+                        android:id="@+id/textViewFechaFin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        tools:text="21 de agosto de 2024" />
+
+                    <!-- Incremento -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Incremento:"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_marginTop="8dp" />
+
+                    <TextView
+                        android:id="@+id/textViewIncremento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        tools:text="5%" />
+
+                    <!-- Renta -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Renta:"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_marginTop="8dp" />
+
+                    <TextView
+                        android:id="@+id/textViewRenta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        tools:text="1234 €" />
+
+                    <!-- Renta renovable -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Renta renovable:"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_marginTop="8dp" />
+
+                    <TextView
+                        android:id="@+id/textViewRentaRenovable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        tools:text="Sí" />
+
+                    <!-- Inquilinos -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Inquilinos:"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_marginTop="8dp" />
+
+                    <TextView
+                        android:id="@+id/textViewInquilinos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        tools:text="Persona1, Persona2" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

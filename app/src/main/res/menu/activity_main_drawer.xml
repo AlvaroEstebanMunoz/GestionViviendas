@@ -1,40 +1,95 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:title="@string/consultar" />
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_casas"
-            android:icon="@drawable/casa"
-            android:title="@string/consulta_casas" />
-        <item
-            android:id="@+id/nav_alquileres"
-            android:icon="@drawable/alquiler"
-            android:title="@string/consulta_alquileres" />
-    </group>
+    <!-- Sección de consulta -->
+    <item android:title="@string/consultar"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
 
     <item
-        android:title="@string/gestionar" />
+        android:id="@+id/nav_casas"
+        android:icon="@drawable/casa"
+        android:title="@string/consulta_casas"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
     <item
-            android:id="@+id/nav_personas"
-            android:icon="@drawable/persona"
-            android:title="@string/gesti_n_de_personas" />
-        <item
-            android:id="@+id/nav_empresas"
-            android:icon="@drawable/empresa"
-            android:title="@string/gesti_n_de_empresas" />
-        <item
-            android:id="@+id/nav_contactos"
-            android:icon="@drawable/contacto"
-            android:title="@string/gesti_n_de_contactos" />
-        <item
-            android:id="@+id/nav_servicios"
-            android:icon="@drawable/servicio"
-            android:title="@string/gesti_n_de_servicios" />
-        <item
-            android:id="@+id/nav_recibos"
-            android:icon="@drawable/recibo"
-            android:title="@string/gesti_n_de_recibos" />
+        android:id="@+id/nav_alquileres"
+        android:icon="@drawable/alquiler"
+        android:title="@string/consulta_alquileres"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
+
+
+    <!-- Sección de gestión -->
+    <item android:title="@string/gestionar"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"/>
+    <item
+        android:id="@+id/nav_personas"
+        android:icon="@drawable/persona"
+        android:title="@string/gesti_n_de_personas"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
+    <item
+        android:id="@+id/nav_empresas"
+        android:icon="@drawable/empresa"
+        android:title="@string/gesti_n_de_empresas"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
+    <item
+        android:id="@+id/nav_contactos"
+        android:icon="@drawable/contacto"
+        android:title="@string/gesti_n_de_contactos"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
+    <item
+        android:id="@+id/nav_servicios"
+        android:icon="@drawable/servicio"
+        android:title="@string/gesti_n_de_servicios"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
+    <item
+        android:id="@+id/nav_recibos"
+        android:icon="@drawable/recibo"
+        android:title="@string/gesti_n_de_recibos"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
+
+    <!-- Divider para separar la opción "Salir" -->
+    <item android:id="@+id/divider" android:title=""
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
+
+    <!-- Opción "Salir" al final -->
+    <item
+        android:id="@+id/nav_salir"
+        android:layout_gravity="bottom"
+        android:icon="@drawable/salir"
+        android:title="@string/salir"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
+
 
 </menu>

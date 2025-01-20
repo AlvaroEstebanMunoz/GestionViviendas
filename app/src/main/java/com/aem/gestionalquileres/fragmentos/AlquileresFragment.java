@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.aem.gestionalquileres.R;
 import com.aem.gestionalquileres.adaptadores.AlquileresAdapter;
 import com.aem.gestionalquileres.modelos.Alquiler;
+import com.aem.gestionalquileres.utilidades.DatabaseManager;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Objects;
 
@@ -28,7 +29,7 @@ public class AlquileresFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_alquileres, container, false);
 
         // Initialize Firebase Firestore
-        db = FirebaseFirestore.getInstance();
+        db = DatabaseManager.getInstance().getFirestore();
 
         // Set up RecyclerView
         recyclerView = view.findViewById(R.id.recyclerViewAlquileres);

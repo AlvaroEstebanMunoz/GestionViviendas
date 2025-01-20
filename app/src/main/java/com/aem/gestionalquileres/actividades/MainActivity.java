@@ -1,6 +1,7 @@
 package com.aem.gestionalquileres.actividades;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
@@ -10,18 +11,23 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.activity.OnBackPressedCallback;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.aem.gestionalquileres.R;
+import com.aem.gestionalquileres.utilidades.DatabaseManager;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     private NavController navController; // Añadido para el NavController
+    private AppBarConfiguration appBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();  // Usar getSupportActionBar() en lugar de ActionBar
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);  // Mostrar la flecha
+            actionBar.setHomeButtonEnabled(true);       // Habilitar el botón
+        }
         // Configura el DrawerLayout y ActionBarDrawerToggle
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -49,13 +60,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navController = navHostFragment.getNavController();
         }
 
-
         // Configura la AppBarConfiguration
         // Añadido para la configuración de la AppBar
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_casas, R.id.nav_personas, R.id.nav_empresas, R.id.nav_contactos,
-                R.id.nav_servicios, R.id.nav_recibos, R.id.nav_alquileres)
-                .setDrawerLayout(drawer)
+         appBarConfiguration = new AppBarConfiguration.Builder(
+        //        R.id.nav_casas, R.id.nav_personas, R.id.nav_empresas, R.id.nav_contactos,
+        //        R.id.nav_servicios, R.id.nav_recibos, R.id.nav_alquileres)
+                R.id.casasFragment,
+                R.id.alquileresFragment, R.id.recibosFragment)
+                .setOpenableLayout(drawer) // según Claude, esto debería hacer que me mostrara la hamburguesa
                 .build();
 
         // Configura la navegación para la AppBar
@@ -73,13 +85,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void handleOnBackPressed() {
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
+                } else if (navController != null && navController.popBackStack()) {
+                    // Si hay un destino previo, regresa a él
                 } else {
-                    if (navController != null && navController.getCurrentDestination() != null) {
-                        // Usar NavController para manejar el retroceso
-                        navController.navigateUp();
-                    } else {
-                        finish();
-                    }
+                    // Si no hay destinos previos, cierra la actividad
+                    finish();
                 }
             }
         });
@@ -96,9 +106,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        // Maneja la acción del menú aquí
+        Log.d("MainActivity", "onOptionsItemSelected called for " + item.getItemId());
+        if (item.getItemId() == android.R.id.home) {
+            // Abre el DrawerLayout o maneja la navegación
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                // En caso de que el Drawer no esté abierto, navega hacia atrás
+                getOnBackPressedDispatcher().onBackPressed();
+            }
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        if (!navController.popBackStack()) {
+            super.onBackPressed();
+        }
+    }
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -107,19 +136,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Usa el NavController para manejar la navegación
         if (navController != null) {
             if (id == R.id.nav_casas) {
-                navController.navigate(R.id.nav_casas);
+                navController.navigate(R.id.casasFragment);
             } else if (id == R.id.nav_personas) {
-                navController.navigate(R.id.nav_personas);
+                navController.navigate(R.id.personasFragment);
             } else if (id == R.id.nav_empresas) {
-                navController.navigate(R.id.nav_empresas);
+                navController.navigate(R.id.empresasFragment);
             } else if (id == R.id.nav_contactos) {
-                navController.navigate(R.id.nav_contactos);
+                navController.navigate(R.id.contactosFragment);
             } else if (id == R.id.nav_servicios) {
-                navController.navigate(R.id.nav_servicios);
+                navController.navigate(R.id.serviciosFragment);
             } else if (id == R.id.nav_recibos) {
-                navController.navigate(R.id.nav_recibos);
+                navController.navigate(R.id.recibosFragment);
             } else if (id == R.id.nav_alquileres) {
-                navController.navigate(R.id.nav_alquileres);
+                navController.navigate(R.id.alquileresFragment);
+            } else if (id == R.id.nav_salir) {
+                cerrarConexionBD(); // Método para cerrar la conexión a la BBDD
+                finishAffinity(); // Cierra la aplicación de forma segura
+                return true;
             }
         }
 
@@ -129,7 +162,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onSupportNavigateUp() {
-        // Manejar la acción del botón de navegación hacia arriba
-        return navController != null && navController.navigateUp() || super.onSupportNavigateUp();
+        // Imprime los fragmentos en la pila de navegación
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        for (Fragment fragment : fragments) {
+            Log.d("NavStack", "Fragment: " + fragment.getClass().getSimpleName());
+        }
+
+        return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
+    }
+
+    private void cerrarConexionBD() {
+        // Verifica si la conexión está abierta y ciérrala
+        DatabaseManager.getInstance().getFirestore().terminate();
     }
 }

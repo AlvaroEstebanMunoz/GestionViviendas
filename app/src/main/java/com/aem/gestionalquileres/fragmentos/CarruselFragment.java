@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.aem.gestionalquileres.R;
 import com.aem.gestionalquileres.adaptadores.CarruselAdapter;
 
+import java.util.Arrays;
+
 
 public class CarruselFragment extends Fragment {
 
@@ -23,8 +25,24 @@ public class CarruselFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewCarrusel);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
+        //se excluye el icono del fragmento desde el que se llama al carrusel
+        int[] icons = getCarruselIcons();
+        int excludeIcon = R.drawable.casa; // Valor por defecto
+
+        // Verifica si hay un argumento que indique qué ícono excluir
+        if (getArguments() != null) {
+            excludeIcon = getArguments().getInt("icono_excluir", R.drawable.casa);
+        }
+
+        // Filtra el ícono que debe excluirse
+        int[] filteredIcons = filterIcons(icons, excludeIcon);
+
+        // Obtener los nombres de los íconos, filtrando también la misma posición del nombre
+        String[] iconNames = getCarruselIconNames();
+        String[] filteredIconNames = filterIconNames(iconNames, icons, excludeIcon);
+
         // Crea el adaptador con los iconos y nombres
-        CarruselAdapter adapter = new CarruselAdapter(getCarruselIcons(), getCarruselIconNames(), this::onIconClicked);
+        CarruselAdapter adapter = new CarruselAdapter(filteredIcons, filteredIconNames, this::onIconClicked);
         recyclerView.setAdapter(adapter);
         return view;
     }
@@ -53,6 +71,29 @@ public class CarruselFragment extends Fragment {
         };
     }
 
+    private int[] filterIcons(int[] icons, int excludeIcon) {
+        // Contar cuántos íconos deben permanecer
+        int count = 0;
+        for (int icon : icons) {
+            if (icon != excludeIcon) {
+                count++;
+            }
+        }
+
+        // Crear un nuevo array con el tamaño correcto
+        int[] filteredIcons = new int[count];
+        int index = 0;
+
+        // Añadir solo los íconos que no sean el que queremos excluir
+        for (int icon : icons) {
+            if (icon != excludeIcon) {
+                filteredIcons[index++] = icon;
+            }
+        }
+
+        return filteredIcons;
+    }
+
     private void onIconClicked(int position) {
         switch (position) {
             case 0:
@@ -66,4 +107,28 @@ public class CarruselFragment extends Fragment {
             // Agrega los casos restantes para cada ícono
         }
     }
+    private String[] filterIconNames(String[] iconNames, int[] icons, int excludeIcon) {
+        // Contar cuántos nombres deben permanecer
+        int count = 0;
+        for (int i = 0; i < icons.length; i++) {
+            if (icons[i] != excludeIcon) {
+                count++;
+            }
+        }
+
+        // Crear un nuevo array con el tamaño correcto para los nombres
+        String[] filteredNames = new String[count];
+        int index = 0;
+
+        // Añadir solo los nombres cuyos íconos no sean el excluido
+        for (int i = 0; i < icons.length; i++) {
+            if (icons[i] != excludeIcon) {
+                filteredNames[index++] = iconNames[i];
+            }
+        }
+
+        return filteredNames;
+    }
+
+
 }

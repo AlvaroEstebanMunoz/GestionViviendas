@@ -1,22 +1,32 @@
 package com.aem.gestionalquileres.modelos;
 
+import com.google.firebase.firestore.DocumentReference;
+
 public class Alquiler {
-    private String id;
-    private String casaId; // Puede ser una referencia a un ID de Casa
-    private String personaId; // Puede ser una referencia a un ID de Persona
+    private String id; // ID único del alquiler
+    private DocumentReference casaRef; // Referencia a la entidad Casa
+    private DocumentReference personaRef; // Referencia a la entidad Persona
     private String fechaInicio;
     private String fechaFin;
+    private Double renta; // Precio del alquiler
+    private Boolean renovable; // Indica si es renovable
+    private Double incrementoAnual; // Incremento anual en porcentaje
 
     // Constructor vacío necesario para Firestore
     public Alquiler() {
     }
 
-    public Alquiler(String id, String casaId, String personaId, String fechaInicio, String fechaFin) {
+    public Alquiler(String id, DocumentReference casaRef, DocumentReference personaRef,
+                    String fechaInicio, String fechaFin, Double renta,
+                    Boolean renovable, Double incrementoAnual) {
         this.id = id;
-        this.casaId = casaId;
-        this.personaId = personaId;
+        this.casaRef = casaRef;
+        this.personaRef = personaRef;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+        this.renta = renta;
+        this.renovable = renovable;
+        this.incrementoAnual = incrementoAnual;
     }
 
     public String getId() {
@@ -27,20 +37,20 @@ public class Alquiler {
         this.id = id;
     }
 
-    public String getCasaId() {
-        return casaId;
+    public DocumentReference getCasaRef() {
+        return casaRef;
     }
 
-    public void setCasaId(String casaId) {
-        this.casaId = casaId;
+    public void setCasaRef(DocumentReference casaRef) {
+        this.casaRef = casaRef;
     }
 
-    public String getPersonaId() {
-        return personaId;
+    public DocumentReference getPersonaRef() {
+        return personaRef;
     }
 
-    public void setPersonaId(String personaId) {
-        this.personaId = personaId;
+    public void setPersonaRef(DocumentReference personaRef) {
+        this.personaRef = personaRef;
     }
 
     public String getFechaInicio() {
@@ -59,6 +69,30 @@ public class Alquiler {
         this.fechaFin = fechaFin;
     }
 
+    public Double getRenta() {
+        return renta;
+    }
+
+    public void setRenta(Double renta) {
+        this.renta = renta;
+    }
+
+    public Boolean getRenovable() {
+        return renovable;
+    }
+
+    public void setRenovable(Boolean renovable) {
+        this.renovable = renovable;
+    }
+
+    public Double getIncrementoAnual() {
+        return incrementoAnual;
+    }
+
+    public void setIncrementoAnual(Double incrementoAnual) {
+        this.incrementoAnual = incrementoAnual;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -66,11 +100,14 @@ public class Alquiler {
 
         Alquiler alquiler = (Alquiler) o;
 
-        return id != null ? id.equals(alquiler.id) : alquiler.id == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        // Comparar los campos relevantes
+        if (!id.equals(alquiler.id)) return false;
+        if (!casaRef.equals(alquiler.casaRef)) return false;
+        if (!personaRef.equals(alquiler.personaRef)) return false;
+        if (!fechaInicio.equals(alquiler.fechaInicio)) return false;
+        if (!fechaFin.equals(alquiler.fechaFin)) return false;
+        if (!renta.equals(alquiler.renta)) return false;
+        if (!renovable.equals(alquiler.renovable)) return false;
+        return incrementoAnual.equals(alquiler.incrementoAnual);
     }
 }

@@ -37,7 +37,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="16dp">
 
@@ -46,17 +46,19 @@
                         android:id="@+id/imagenCasa"
                         android:layout_width="match_parent"
                         android:layout_height="120dp"
-                        android:scaleType="centerCrop" />
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Imagen de la casa" />
 
                     <!-- Dirección mostrada en lugar del ID -->
                     <TextView
                         android:id="@+id/textViewDireccion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
                         android:layout_marginTop="8dp"
                         android:text="Dirección"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:contentDescription="Dirección de la casa"/>
 
                     <!-- Precio y alquilado -->
                     <LinearLayout
@@ -68,7 +70,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Precio: "
+                            android:text="Precio:"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -76,17 +78,19 @@
                             android:id="@+id/textViewPrecio"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="16sp"
                             android:layout_weight="1"
-                            android:text="€/mes"
-                            android:textSize="16sp" />
+                            android:text="€/mes"/>
 
-                        <RadioButton
+                        <com.google.android.material.chip.Chip
                             android:id="@+id/textViewAlquilado"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:checked="false"
                             android:text="Alquilado"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            app:chipBackgroundColor="@color/cardBackgroundColor"
+                            app:chipIcon="@drawable/ic_check"
+                            android:checked="false"/>
                     </LinearLayout>
 
                     <!-- Habitaciones y metros cuadrados dentro del CardView -->
@@ -107,9 +111,9 @@
                             android:id="@+id/textViewHabitaciones"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="16sp"
                             android:layout_weight="1"
-                            android:text=""
-                            android:textSize="16sp" />
+                            android:text=""/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -122,27 +126,27 @@
                             android:id="@+id/textViewMetros"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=""
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:text=""/>
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Incluir el carrusel -->
-            <include
+            <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/carruselFragment"
-                layout="@layout/carrusel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                tools:visibility="visible" />
+                tools:visibility="visible"/>
 
             <!-- Lista para mostrar el resultado de la acción del carrusel -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listaResultados"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp" />
+                android:padding="8dp"
+                android:layout_marginTop="8dp"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -160,21 +164,30 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Añadir" />
+            android:text="Añadir"
+            android:icon="@drawable/ic_add"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"/>
 
         <Button
             android:id="@+id/btnModificar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Modificar" />
+            android:text="Modificar"
+            android:icon="@drawable/ic_edit"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"/>
 
         <Button
             android:id="@+id/btnEliminar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Eliminar" />
+            android:text="Eliminar"
+            android:icon="@drawable/ic_delete"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

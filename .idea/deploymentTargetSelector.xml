@@ -4,7 +4,18 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-08-22T17:36:13.086405100Z">
+        <DropdownSelection timestamp="2024-09-05T15:50:28.107114200Z">
+          <Target type="DEFAULT_BOOT">
+            <handle>
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\Alvaro\.android\avd\BQ_Aquaris_X5_API_30.avd" />
+            </handle>
+          </Target>
+        </DropdownSelection>
+        <DialogSelection />
+      </SelectionState>
+      <SelectionState runConfigName="MainActivity">
+        <option name="selectionMode" value="DROPDOWN" />
+        <DropdownSelection timestamp="2025-01-18T22:53:12.911297100Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="PhysicalDevice" identifier="serial=R58N85MW9VP" />

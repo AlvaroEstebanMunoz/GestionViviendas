@@ -35,7 +35,7 @@
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/appBarLayout"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        android:scrollbars="vertical"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer" />
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

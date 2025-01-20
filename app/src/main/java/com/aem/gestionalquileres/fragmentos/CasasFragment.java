@@ -15,6 +15,7 @@ import com.aem.gestionalquileres.R;
 import com.aem.gestionalquileres.actividades.MainActivity;
 import com.aem.gestionalquileres.adaptadores.CasasAdapter;
 import com.aem.gestionalquileres.modelos.Casa;
+import com.aem.gestionalquileres.utilidades.DatabaseManager;
 import com.aem.gestionalquileres.utilidades.DecoracionEspacioFinal;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -47,7 +48,7 @@ public class CasasFragment extends Fragment {
         }
 
         // Inicializar Firebase Firestore
-        db = FirebaseFirestore.getInstance();
+        db = DatabaseManager.getInstance().getFirestore();
 
         // Configurar RecyclerView
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewCasas);
@@ -73,14 +74,21 @@ public class CasasFragment extends Fragment {
 
         // Obtener datos desde Firestore
         fetchCasas();
+        //todo Dependencia de Firebase:
+        // Al obtener los datos de Firestore, se manejan conversiones y asignaciones.
+        // Sin embargo, no hay lógica específica para manejar errores de navegación o
+        // asegurar un retroceso adecuado al fragmento anterior.
     }
+
+    // Lista local para almacenar las casas actuales
+    private List<Casa> ListaCasasActual = new ArrayList<>();
 
     private void fetchCasas() {
         db.collection("Casas")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        List<Casa> casasList = new ArrayList<>();
+                        List<Casa> newCasasList = new ArrayList<>();
                         for (DocumentSnapshot document : task.getResult()) {
                             Casa casa = document.toObject(Casa.class);
 
@@ -99,13 +107,20 @@ public class CasasFragment extends Fragment {
                             }
 
                             if (casa != null) {
-                                casasList.add(casa);
+                                newCasasList.add(casa);
                             }
                         }
 
-                        adapter.submitList(casasList);
+                        // Comparar la lista actual con la nueva lista
+                        if (!ListaCasasActual.equals(newCasasList)) {
+                            // Si son diferentes, actualizar la lista local y el adaptador
+                            ListaCasasActual.clear();
+                            ListaCasasActual.addAll(newCasasList);
+                            adapter.submitList(new ArrayList<>(ListaCasasActual)); // Crear una copia para evitar problemas de referencia
+                        }
                     }
                 });
     }
+
 
 }

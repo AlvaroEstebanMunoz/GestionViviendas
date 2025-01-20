@@ -10,4 +10,25 @@
     <color name="cardBackgroundColor">#8EBFE4</color>
     <color name="cardBorderColor">#BDBDBD</color>
 
+    <!-- Colores principales -->
+    <color name="colorPrimary">#84A7BE</color> <!-- Azul claro -->
+    <color name="colorPrimaryVariant">#5A7B8A</color> <!-- Azul más oscuro para variantes -->
+    <color name="colorPrimaryDark">#D6A09C</color> <!-- Tonalidad oscura del primario -->
+
+    <!-- Colores secundarios -->
+    <color name="colorSecondary">#FF9800</color> <!-- Naranja (por ejemplo) -->
+    <color name="colorSecondaryVariant">#F57C00</color> <!-- Naranja más oscuro -->
+
+    <!-- Color de acento -->
+    <color name="colorAccent">#3B6CFF</color> <!-- Azul acento -->
+
+    <!-- Otros colores -->
+    <color name="miFondo">#045C97</color> <!-- Fondo personalizado -->
+    <color name="textColor">#000000</color> <!-- Color de texto negro -->
+
+    <!-- Night mode colors -->
+    <color name="colorPrimaryNight">#6200EA</color> <!-- Púrpura para modo nocturno -->
+    <color name="colorPrimaryVariantNight">#3700B3</color> <!-- Variante oscura del primario nocturno -->
+    <color name="colorSecondaryNight">#03DAC6</color> <!-- Cian para el secundario nocturno -->
+    <color name="colorSecondaryVariantNight">#018786</color> <!-- Variante oscura del secundario nocturno -->
 </resources>

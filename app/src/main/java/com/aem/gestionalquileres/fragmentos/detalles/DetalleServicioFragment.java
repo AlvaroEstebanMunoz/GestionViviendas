@@ -1,4 +1,4 @@
-package com.aem.gestionalquileres.fragmentos.detalles;
+/*package com.aem.gestionalquileres.fragmentos.detalles;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -17,14 +17,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.aem.gestionalquileres.R;
 import com.aem.gestionalquileres.fragmentos.CarruselFragment;
-import com.aem.gestionalquileres.modelos.Casa;
+import com.aem.gestionalquileres.modelos.Alquiler;
 import com.bumptech.glide.Glide;
 
-public class DetalleCasaFragment extends Fragment {
+public class DetalleServicioFragment extends Fragment {
 
-    private ImageView imagenCasa;
-    //private TextView aliasCasa;
-    private TextView direccionCasa;
+    private ImageView imagenAlquiler;
+    private TextView direccionAlquiler;
     private String alias;
     private String tituloOriginal;
 
@@ -34,22 +33,21 @@ public class DetalleCasaFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         // Inflar el layout del fragmento
-        View view = inflater.inflate(R.layout.item_casa, container, false);
+        View view = inflater.inflate(R.layout.item_alquiler, container, false);
 
         // Inicializar las vistas
-        imagenCasa = view.findViewById(R.id.imagenCasa);
-        //aliasCasa = view.findViewById(R.id.aliasCasa);
-        direccionCasa = view.findViewById(R.id.textViewDireccion);
+        imagenAlquiler = view.findViewById(R.id.imagenAlquiler);
+        direccionAlquiler = view.findViewById(R.id.textViewDireccionAlquiler);
 
         // Agregar CarruselFragment dinámicamente
         agregarCarruselFragment();
 
-        // Obtener el objeto Casa pasado en el Bundle
+        // Obtener el objeto Alquiler pasado en el Bundle
         if (getArguments() != null) {
-            Casa casa = (Casa) getArguments().getSerializable("casa");
-            if (casa != null) {
-                alias =casa.getAlias();
-                mostrarDetallesCasa(casa);
+            Alquiler alquiler = (Alquiler) getArguments().getSerializable("alquiler");
+            if (alquiler != null) {
+                alias = alquiler.getAlias();
+                mostrarDetallesAlquiler(alquiler);
                 setToolbarTitle(alias);
             }
         }
@@ -57,22 +55,21 @@ public class DetalleCasaFragment extends Fragment {
         return view;
     }
 
-    private void mostrarDetallesCasa(Casa casa) {
-        // Establecer los detalles de la casa en las vistas
-        direccionCasa.setText(casa.getDireccion());
-        //aliasCasa.setText(casa.getAlias());
+    private void mostrarDetallesAlquiler(Alquiler alquiler) {
+        // Establecer los detalles del alquiler en las vistas
+        direccionAlquiler.setText(alquiler.getDireccion());
 
         // Cargar la imagen usando Glide
         Glide.with(this)
-                .load(casa.getFoto())
+                .load(alquiler.getFoto())
                 .placeholder(R.drawable.placeholder_image) // Imagen de placeholder
-                .into(imagenCasa);
+                .into(imagenAlquiler);
     }
 
     private void setToolbarTitle(String title) {
         if (getActivity() != null) {
-            AppCompatActivity activity= (AppCompatActivity) getActivity();
-            if (activity.getSupportActionBar() != null){
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+            if (activity.getSupportActionBar() != null) {
                 if (tituloOriginal == null) {
                     // Guardar el título original
                     tituloOriginal = activity.getSupportActionBar().getTitle().toString();
@@ -88,7 +85,7 @@ public class DetalleCasaFragment extends Fragment {
 
         // Crear un Bundle para pasar el ícono a excluir
         Bundle args = new Bundle();
-        args.putInt("icono_excluir", R.drawable.casa); // Aquí se define el ícono que se quiere excluir
+        args.putInt("icono_excluir", R.drawable.icono_default); // Aquí se define el ícono que se quiere excluir
         carruselFragment.setArguments(args);
 
         // Obtener el FragmentManager y comenzar una transacción
@@ -111,5 +108,5 @@ public class DetalleCasaFragment extends Fragment {
             }
         }
     }
-
 }
+*/
