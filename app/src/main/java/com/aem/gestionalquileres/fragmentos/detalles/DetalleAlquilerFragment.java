@@ -12,12 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.aem.gestionalquileres.R;
+import com.aem.gestionalquileres.fragmentos.CarruselFragment;
 import com.aem.gestionalquileres.modelos.Alquiler;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class DetalleAlquilerFragment extends Fragment {
 
@@ -34,9 +36,12 @@ public class DetalleAlquilerFragment extends Fragment {
         // Inicializar las vistas
         textViewFechaInicio = view.findViewById(R.id.textViewFechaInicio);
         textViewFechaFin = view.findViewById(R.id.textViewFechaFin);
-        textViewRenta = view.findViewById(R.id.textViewRenta);
-        textViewRenovable = view.findViewById(R.id.textViewRentaRenovable);
-        textViewIncremento = view.findViewById(R.id.textViewIncremento);
+        //textViewRenta = view.findViewById(R.id.textViewRenta);
+        //textViewRenovable = view.findViewById(R.id.textViewRentaRenovable);
+        //textViewIncremento = view.findViewById(R.id.textViewIncremento);
+
+        // Agregar CarruselFragment dinámicamente
+        agregarCarruselFragment(); //añadido
 
         // Obtener datos del Bundle
         if (getArguments() != null) {
@@ -84,6 +89,24 @@ public class DetalleAlquilerFragment extends Fragment {
             }
         }
     }
+
+    private void agregarCarruselFragment() { //añadido
+        // Crear una instancia del CarruselFragment
+        CarruselFragment carruselFragment = new CarruselFragment();
+
+        // Crear un Bundle para pasar el ícono a excluir
+        Bundle args = new Bundle();
+        args.putInt("icono_excluir", R.drawable.alquiler); // Aquí se define el ícono que se quiere excluir
+        carruselFragment.setArguments(args);
+
+        // Obtener el FragmentManager y comenzar una transacción
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        // Reemplazar el contenedor (el include en tu layout) con el CarruselFragment
+        fragmentTransaction.replace(R.id.carruselFragment, carruselFragment);
+        fragmentTransaction.commit();
+    } //añadido
 
     @Override
     public void onDestroyView() {

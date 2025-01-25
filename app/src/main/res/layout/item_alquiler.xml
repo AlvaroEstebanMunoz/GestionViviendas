@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".fragmentos.detalles.DetalleAlquilerFragment">
 
-    <!-- ScrollView para contenido desplazable -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -17,13 +16,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="16dp">
 
-        <!-- Contenedor principal -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- CardView para información del alquiler -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -38,20 +35,21 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <!-- Contrato -->
+                    <!-- Propiedad -->
                     <TextView
+                        android:id="@+id/textViewPropiedad"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Contrato:"
+                        android:text="Propiedad:"
                         android:textStyle="bold"
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/textViewContrato"
+                        android:id="@+id/textViewNombrePropiedad"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        tools:text="https://firebase.storage..." />
+                        tools:text="Casa en la playa" />
 
                     <!-- Fecha de inicio -->
                     <TextView
@@ -69,11 +67,11 @@
                         android:textSize="14sp"
                         tools:text="21 de agosto de 2024" />
 
-                    <!-- Fecha de renovación -->
+                    <!-- Fecha fin -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Fecha de renovación:"
+                        android:text="Fecha fin:"
                         android:textStyle="bold"
                         android:textSize="16sp"
                         android:layout_marginTop="8dp" />
@@ -83,71 +81,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        tools:text="21 de agosto de 2024" />
+                        tools:text="21 de agosto de 2025" />
 
-                    <!-- Incremento -->
+                    <!-- Inquilino -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Incremento:"
+                        android:text="Inquilino:"
                         android:textStyle="bold"
                         android:textSize="16sp"
                         android:layout_marginTop="8dp" />
 
                     <TextView
-                        android:id="@+id/textViewIncremento"
+                        android:id="@+id/textViewInquilino"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        tools:text="5%" />
-
-                    <!-- Renta -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Renta:"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:layout_marginTop="8dp" />
-
-                    <TextView
-                        android:id="@+id/textViewRenta"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        tools:text="1234 €" />
-
-                    <!-- Renta renovable -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Renta renovable:"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:layout_marginTop="8dp" />
-
-                    <TextView
-                        android:id="@+id/textViewRentaRenovable"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        tools:text="Sí" />
-
-                    <!-- Inquilinos -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Inquilinos:"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:layout_marginTop="8dp" />
-
-                    <TextView
-                        android:id="@+id/textViewInquilinos"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        tools:text="Persona1, Persona2" />
+                        tools:text="Juan Pérez" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

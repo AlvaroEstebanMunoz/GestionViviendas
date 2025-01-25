@@ -80,15 +80,12 @@ public class CasasFragment extends Fragment {
         // asegurar un retroceso adecuado al fragmento anterior.
     }
 
-    // Lista local para almacenar las casas actuales
-    private List<Casa> ListaCasasActual = new ArrayList<>();
-
     private void fetchCasas() {
         db.collection("Casas")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        List<Casa> newCasasList = new ArrayList<>();
+                        List<Casa> casasList = new ArrayList<>();
                         for (DocumentSnapshot document : task.getResult()) {
                             Casa casa = document.toObject(Casa.class);
 
@@ -107,20 +104,13 @@ public class CasasFragment extends Fragment {
                             }
 
                             if (casa != null) {
-                                newCasasList.add(casa);
+                                casasList.add(casa);
                             }
                         }
 
-                        // Comparar la lista actual con la nueva lista
-                        if (!ListaCasasActual.equals(newCasasList)) {
-                            // Si son diferentes, actualizar la lista local y el adaptador
-                            ListaCasasActual.clear();
-                            ListaCasasActual.addAll(newCasasList);
-                            adapter.submitList(new ArrayList<>(ListaCasasActual)); // Crear una copia para evitar problemas de referencia
-                        }
+                        adapter.submitList(casasList);
                     }
                 });
     }
-
 
 }

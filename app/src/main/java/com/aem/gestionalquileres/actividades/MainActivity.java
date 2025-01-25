@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //        R.id.nav_servicios, R.id.nav_recibos, R.id.nav_alquileres)
                 R.id.casasFragment,
                 R.id.alquileresFragment, R.id.recibosFragment)
-                .setOpenableLayout(drawer) // según Claude, esto debería hacer que me mostrara la hamburguesa
+                .setOpenableLayout(drawer)
                 .build();
 
         // Configura la navegación para la AppBar

@@ -7,42 +7,71 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aem.gestionalquileres.R;
+import com.aem.gestionalquileres.actividades.MainActivity;
 import com.aem.gestionalquileres.adaptadores.AlquileresAdapter;
 import com.aem.gestionalquileres.modelos.Alquiler;
 import com.aem.gestionalquileres.utilidades.DatabaseManager;
+import com.aem.gestionalquileres.utilidades.DecoracionEspacioFinal;
 import com.google.firebase.firestore.FirebaseFirestore;
-import java.util.Objects;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AlquileresFragment extends Fragment {
 
-    private RecyclerView recyclerView;
     private AlquileresAdapter adapter;
     private FirebaseFirestore db;
+    private NavController navController;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_alquileres, container, false);
+        // Inflar el layout del fragmento y devolver la vista
+        return inflater.inflate(R.layout.fragment_alquileres, container, false);
+    }
 
-        // Initialize Firebase Firestore
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Obtener el NavController desde la MainActivity
+        if (getActivity() instanceof MainActivity) {
+            navController = ((MainActivity) getActivity()).getNavController();
+        }
+
+        // Inicializar Firebase Firestore
         db = DatabaseManager.getInstance().getFirestore();
 
-        // Set up RecyclerView
-        recyclerView = view.findViewById(R.id.recyclerViewAlquileres);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        // Configurar RecyclerView
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerViewAlquileres);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
 
-        // Initialize adapter with an empty list
-        adapter = new AlquileresAdapter(new AlquileresAdapter.AlquilerDiff());
+        boolean isHorizontal = layoutManager.getOrientation() == LinearLayoutManager.HORIZONTAL;
+
+        // Crear decoración y añadir al RecyclerView
+        int space = 6; // Ajustar espacio según sea necesario
+        DecoracionEspacioFinal decoracion = new DecoracionEspacioFinal(space, isHorizontal);
+        recyclerView.addItemDecoration(decoracion);
+
+        // Inicializar adaptador con una lista vacía y configurar el listener de clics
+        adapter = new AlquileresAdapter(new AlquileresAdapter.AlquilerDiff(), alquiler -> {
+            if (navController != null) { // Verificación de navController
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("alquiler", alquiler); // Pasar el objeto Alquiler al siguiente fragmento
+                navController.navigate(R.id.action_alquileresFragment_to_detalleAlquilerFragment, bundle); // Navegación
+            }
+        });
         recyclerView.setAdapter(adapter);
 
-        // Fetch data from Firestore
+        // Obtener datos desde Firestore
         fetchAlquileres();
-
-        return view;
     }
 
     private void fetchAlquileres() {
@@ -50,7 +79,13 @@ public class AlquileresFragment extends Fragment {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        adapter.submitList(Objects.requireNonNull(task.getResult()).toObjects(Alquiler.class));
+                        QuerySnapshot result = task.getResult();
+                        if (result != null) {
+                            List<Alquiler> alquileresList = new ArrayList<>(result.toObjects(Alquiler.class));
+                            adapter.submitList(alquileresList);
+                        }
+                    } else {
+                        // Manejo de errores (puedes mostrar un mensaje al usuario si es necesario)
                     }
                 });
     }

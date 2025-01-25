@@ -15,8 +15,17 @@ import com.aem.gestionalquileres.modelos.Alquiler;
 
 public class AlquileresAdapter extends ListAdapter<Alquiler, AlquileresAdapter.AlquilerViewHolder> {
 
-    public AlquileresAdapter(@NonNull DiffUtil.ItemCallback<Alquiler> diffCallback) {
+    // Interfaz para manejar el evento de toque
+    public interface OnItemClickListener {
+        void onItemClick(Alquiler alquiler);
+    }
+
+    private final OnItemClickListener onItemClickListener;
+
+    // Constructor modificado para aceptar el listener
+    public AlquileresAdapter(@NonNull DiffUtil.ItemCallback<Alquiler> diffCallback, OnItemClickListener listener) {
         super(diffCallback);
+        this.onItemClickListener = listener;
     }
 
     @NonNull
@@ -30,46 +39,32 @@ public class AlquileresAdapter extends ListAdapter<Alquiler, AlquileresAdapter.A
     @Override
     public void onBindViewHolder(@NonNull AlquilerViewHolder holder, int position) {
         Alquiler alquiler = getItem(position);
-
-        // Setear los datos del alquiler en los elementos de la vista
-        holder.textViewFechaInicio.setText(alquiler.getFechaInicio());
-        holder.textViewFechaFin.setText(alquiler.getFechaFin());
-        holder.textViewRenta.setText(String.format("$%.2f", alquiler.getRenta()));
-
-        //if (alquiler.getRenovable() != null) {
-        //    holder.textViewRenovable.setText(alquiler.getRenovable() ? "Sí" : "No");
-        //}
-
-        if (alquiler.getIncrementoAnual() != null) {
-            holder.textViewIncremento.setText(
-                    String.format("%.2f%%", alquiler.getIncrementoAnual())
-            );
-        }
-
-        // todo Por ahora no mostramos datos de casa y persona, pero los ViewHolders están preparados
-        //holder.textViewCasa.setText("Casa no informada");
-        holder.textViewPersona.setText("Persona no informada");
+        holder.bind(alquiler);
     }
 
-    public static class AlquilerViewHolder extends RecyclerView.ViewHolder {
+    public class AlquilerViewHolder extends RecyclerView.ViewHolder {
         private final TextView textViewFechaInicio;
         private final TextView textViewFechaFin;
-        private final TextView textViewRenta;
-        //private final TextView textViewRenovable;
-        private final TextView textViewIncremento;
-        //private final TextView textViewCasa;
-        private final TextView textViewPersona;
 
         public AlquilerViewHolder(@NonNull View itemView) {
             super(itemView);
-
             textViewFechaInicio = itemView.findViewById(R.id.textViewFechaInicio);
             textViewFechaFin = itemView.findViewById(R.id.textViewFechaFin);
-            textViewRenta = itemView.findViewById(R.id.textViewRenta);
-            textViewIncremento = itemView.findViewById(R.id.textViewIncremento);
-            //todo aquí hay que poner la referencia de la casa y de los inquilinos casaRef personaRef
-            //textViewCasa = itemView.findViewById(R.id.textViewCasa);
-            textViewPersona = itemView.findViewById(R.id.textViewInquilinos);
+
+            // Configurar el listener de toque
+            itemView.setOnClickListener(v -> {
+                if (onItemClickListener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        onItemClickListener.onItemClick(getItem(position));
+                    }
+                }
+            });
+        }
+
+        public void bind(Alquiler alquiler) {
+            textViewFechaInicio.setText(alquiler.getFechaInicio());
+            textViewFechaFin.setText(alquiler.getFechaFin());
         }
     }
 

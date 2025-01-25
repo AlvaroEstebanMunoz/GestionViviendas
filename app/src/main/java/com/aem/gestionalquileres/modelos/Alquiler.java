@@ -2,7 +2,9 @@ package com.aem.gestionalquileres.modelos;
 
 import com.google.firebase.firestore.DocumentReference;
 
-public class Alquiler {
+import java.io.Serializable;
+
+public class Alquiler implements Serializable {
     private String id; // ID único del alquiler
     private DocumentReference casaRef; // Referencia a la entidad Casa
     private DocumentReference personaRef; // Referencia a la entidad Persona

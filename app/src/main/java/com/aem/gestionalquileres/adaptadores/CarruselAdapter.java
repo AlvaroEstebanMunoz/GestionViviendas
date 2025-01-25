@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.aem.gestionalquileres.R;
@@ -12,7 +13,7 @@ import com.aem.gestionalquileres.R;
 public class CarruselAdapter extends RecyclerView.Adapter<CarruselAdapter.CarruselViewHolder> {
 
     private final int[] icons;
-    private final String[] iconNames; // Agregado para los nombres de los iconos
+    private final String[] iconNames;
     private final OnIconClickListener listener;
 
     public interface OnIconClickListener {
@@ -35,6 +36,7 @@ public class CarruselAdapter extends RecyclerView.Adapter<CarruselAdapter.Carrus
     @Override
     public void onBindViewHolder(@NonNull CarruselViewHolder holder, int position) {
         holder.imageViewIcon.setImageResource(icons[position]);
+        holder.textViewIconName.setText(iconNames[position]); // Establecer el nombre debajo del icono
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             holder.imageViewIcon.setTooltipText(iconNames[position]); // Establecer el texto del tooltip
         }
@@ -48,10 +50,12 @@ public class CarruselAdapter extends RecyclerView.Adapter<CarruselAdapter.Carrus
 
     static class CarruselViewHolder extends RecyclerView.ViewHolder {
         ImageView imageViewIcon;
+        TextView textViewIconName;
 
         CarruselViewHolder(View itemView) {
             super(itemView);
             imageViewIcon = itemView.findViewById(R.id.imageViewIcon);
+            textViewIconName = itemView.findViewById(R.id.textViewIconName);
         }
     }
 }
